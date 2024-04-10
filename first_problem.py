@@ -42,6 +42,11 @@ class Main:
         tie_count = 0
         round_count = 0
 
+        # variables for future count without full ruin
+        fir_w_count_wfr = 0
+        sec_w_count_wfr = 0
+        tie_count_wfr = 0
+
         # calculation of game
         for i in (range(n_game)): # games
             balance = 0
@@ -52,15 +57,23 @@ class Main:
                     balance -= 1
                 if balance == y:
                     fir_w_count += 1
+                    fir_w_count_wfr += 1
                     round_count += j + 1
                     break
                 if balance == -x:
                     sec_w_count += 1
+                    sec_w_count_wfr += 1
                     round_count += j + 1
                     break
-            if balance != -x and balance != y:
+            if balance != -x and balance != y: # additional calc for no total ruin
                 tie_count += 1
                 round_count += j + 1
+                if balance < (-x + y) / 2:
+                    sec_w_count_wfr += 1
+                elif balance > (-x + y) / 2:
+                    fir_w_count_wfr += 1
+                else:
+                    tie_count_wfr += 1
 
         # results
         print(f"\nПобеды первого: {fir_w_count}")
@@ -71,7 +84,18 @@ class Main:
         print(f"\nВероятность победы первого: {fir_w_count / n_game}")
         print(f"Вероятность победы второго: {sec_w_count / n_game}")
         print(f"Средняя продолжительность игры: {int(round_count / n)} (раунд) из {n} (раунд)")
-        input("Enter для закрытия")
+
+        # results of game without total ruin
+        print(f"\nПобеды первого если учесть игру без полного разорения: {fir_w_count_wfr}")
+        print(f"Победы второго если учесть игру без полного разорения: {sec_w_count_wfr}")
+        print(f"Ничьи если учесть игру без полного разорения: {tie_count_wfr}")
+
+        # answer to questions of problem without total ruin
+        print(f"\nВероятность победы первого если учесть игру без полног разорения: {fir_w_count_wfr / n_game}")
+        print(f"Вероятность победы второго если учесть игру без полног разорения: {sec_w_count_wfr / n_game}")
+        print(f"Средняя продолжительность игры: {int(round_count / n)} (раунд) из {n} (раунд)")
+
+        input("\nEnter для закрытия")
         return
 
 
