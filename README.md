@@ -1,5 +1,7 @@
 # Mathematical and computer modeling
 ## Description
+\
+Данный репозиторий создан для отчетов по компьютерному моделированию
 ### First problem
 Condirions provided in class:\
 \
@@ -13,3 +15,5 @@ N = 100\
 N_game = 1000
 ## Technologies
 Python 3.11.8
+### Author
+Anton Abramenkov (HeartvsFeather)
