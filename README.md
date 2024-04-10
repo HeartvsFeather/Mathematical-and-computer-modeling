@@ -18,7 +18,7 @@ Conditions provided in class:\
 N = 100\
 N_game = 1000
 ## Technologies
-Python 3.11.8
+Python 3.11.8\
 Matplotlib
 ### Author
 Anton Abramenkov (HeartvsFeather)
