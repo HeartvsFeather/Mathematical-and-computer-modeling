@@ -8,6 +8,7 @@ Condirions provided in class:\
 Для данной функции: cos(3 * x) + 0.2 * x найти и вывести градиентный спуск.\
 \
 Отдельно показан спуск на графике функции, шаг взятый для отрисовки отличается от реального подсчетного шага.\
+\
 **Лучше запукать это решение через Джупайтер**
 ### Second problem
 Conditions provided in class:\
@@ -18,5 +19,6 @@ N = 100\
 N_game = 1000
 ## Technologies
 Python 3.11.8
+Matplotlib
 ### Author
 Anton Abramenkov (HeartvsFeather)
