@@ -2,7 +2,7 @@ import random as r
 
 class Main:
     def game(self):
-        # enter p, x, y
+        # ввод параметров p, x и y
         try:
             p = float(input("Введите вероятность выпадение орла в формате (0.00): "))
             if p > 1. or p < 0.:
@@ -34,7 +34,7 @@ class Main:
             input("Enter для закрытия")
             return
 
-        # variables for future count
+        # переменные для расчетов игры с полным разорением
         n = 1000
         n_game = 1000
         fir_w_count = 0
@@ -42,30 +42,31 @@ class Main:
         tie_count = 0
         round_count = 0
 
-        # variables for future count without full ruin
+        # переменные для расчетов игры без полного разорения
         fir_w_count_wfr = 0
         sec_w_count_wfr = 0
         tie_count_wfr = 0
 
-        # calculation of game
-        for i in (range(n_game)): # games
+        # расчет игр
+        for i in (range(n_game)): # все n_game игр
             balance = 0
-            for j in (range(n)): # rounds in one game
-                if r.random() < p:
+            for j in (range(n)): # n раундов в n_game игр
+                if r.random() < p: # победа первого с учетом вероятности выпадения орла
                     balance += 1
                 else:
-                    balance -= 1
-                if balance == y:
+                    balance -= 1 # победа второго
+                if balance == y: # полное разорение второго
                     fir_w_count += 1
                     fir_w_count_wfr += 1
                     round_count += j + 1
                     break
-                if balance == -x:
+                if balance == -x: # полное разорение перовго
                     sec_w_count += 1
                     sec_w_count_wfr += 1
                     round_count += j + 1
                     break
-            if balance != -x and balance != y: # additional calc for no total ruin
+            # отдельный подсчет игр без полного разорения
+            if balance != -x and balance != y:
                 tie_count += 1
                 round_count += j + 1
                 if balance < (-x + y) / 2:
@@ -75,22 +76,23 @@ class Main:
                 else:
                     tie_count_wfr += 1
 
-        # results
+        # вывод результатов расчетов
         print(f"\nПобеды первого: {fir_w_count}")
         print(f"Победы второго: {sec_w_count}")
         print(f"Ничьи: {tie_count}")
 
-        # answer to questions of problem
+        # ответы на поставленные вопросы проблемы
         print(f"\nВероятность победы первого: {fir_w_count / n_game}")
         print(f"Вероятность победы второго: {sec_w_count / n_game}")
-        print(f"Средняя продолжительность игры: {int(round_count / n)} (раунд) из {n} (раунд)")
+        print(f"Средняя продолжительность игры: {int(round_count / n)} (раунд) из {n} "
+              f"(раунд)")
 
-        # results of game without total ruin
+        # вывод результатов расчетов без полного разорения
         print(f"\nПобеды первого если учесть игру без полного разорения: {fir_w_count_wfr}")
         print(f"Победы второго если учесть игру без полного разорения: {sec_w_count_wfr}")
         print(f"Ничьи если учесть игру без полного разорения: {tie_count_wfr}")
 
-        # answer to questions of problem without total ruin
+        # ответы на поставленные вопросы проблемы без полного разорения
         print(f"\nВероятность победы первого если учесть игру без полног разорения: {fir_w_count_wfr / n_game}")
         print(f"Вероятность победы второго если учесть игру без полног разорения: {sec_w_count_wfr / n_game}")
         print(f"Средняя продолжительность игры: {int(round_count / n)} (раунд) из {n} (раунд)")
